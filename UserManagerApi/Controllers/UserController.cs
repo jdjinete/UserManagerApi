@@ -26,6 +26,7 @@ namespace UserManagerApi.Controllers
         // GET: api/User
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        
         {
 
 

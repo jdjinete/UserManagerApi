@@ -1,0 +1,83 @@
+﻿@model WebAppManagerContent.Models.AccountModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Gestión de Usuarios</h1>
+
+<h4>Crear Usuario</h4>
+<hr />
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group row">
+                <label asp-for="Name" class="col-sm-3 control-label"></label>
+                <div class="col-sm-9">
+                    <input asp-for="Name" class="form-control" value="Usuario prueba" />
+                </div>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <label asp-for="SPassword" class="col-sm-3 control-label"></label>
+                <div class="col-sm-9">
+                    <input asp-for="SPassword" class="form-control" />
+                </div>
+                <span asp-validation-for="SPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <label asp-for="FullName" class="col-sm-3 control-label"></label>
+
+                <div class="col-sm-9">
+                    <input asp-for="FullName" class="form-control" value="Usuario test" />
+                </div>
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Address" class="col-sm-3 control-label"></label>
+                <div class="col-sm-9">
+                    <input asp-for="Address" class="form-control" value="calle 1 # 40-19" />
+                </div>
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Phone" class="col-sm-3 control-label"></label>
+                <div class="col-sm-9">
+                    <input asp-for="Phone" class="form-control"  value="4849487272"/>
+                </div>
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Email" class="col-sm-3 control-label"></label>
+                <div class="col-sm-9">
+                    <input asp-for="Email" class="form-control" value="correotest@gmail.com" />
+                </div>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Age" class="col-sm-3 control-label"></label>
+                <div class="col-sm-9">
+                    <input asp-for="Age" class="form-control" value="34"/>
+                </div>
+                <span asp-validation-for="Age" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <label asp-for="IdRole" class="col-sm-3 control-label"></label>
+                <div class="col-sm-9">
+                    <input asp-for="IdRole" class="form-control" value="1" />
+                </div>
+                <span asp-validation-for="IdRole" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Atras</a>
+</div>
+

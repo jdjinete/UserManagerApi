@@ -1,12 +1,15 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using UserManagerApi.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace UserManagerApi
+namespace WebAppManagerContent
 {
     public class Startup
     {
@@ -20,16 +23,7 @@ namespace UserManagerApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var server = Configuration["DBServer"] ?? "localhost";
-            var port = Configuration["DBPort"] ?? "1433";
-            var user = Configuration["DBUser"] ?? "ArandaApp";
-            var password = Configuration["DBPassword"] ?? "1234";
-            var database = Configuration["Database"] ?? "ARANDADB";
-
-
-            services.AddDbContext<ArandaContext>(options =>
-            options.UseSqlServer($"Server=DESKTOP-PDTEPRF;Initial Catalog={database};User Id={user};Password={password}"));
-            services.AddControllers();
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,31 +33,25 @@ namespace UserManagerApi
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
 
             app.UseRouting();
 
             app.UseAuthorization();
 
-            app.UseCors();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=User}/{action=Authentication}/{data?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
-
-
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapControllerRoute(
-            //    name: "Authentication",
-            //    pattern: "api/{controller}/{action}/{id}",
-            //    defaults: new { action = "Index" });
-            //});
-
         }
     }
 }
