@@ -25,11 +25,25 @@ namespace UserManagerApi.Controllers
 
         // GET: api/User
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<UserDTO>>> GetUsers()
         {
+            var dataUser = from userx in await _context.User.ToListAsync()
+            join rolex in await _context.Role.ToListAsync() on userx.IdRole equals rolex.IdRole
+                           select (new UserDTO
+                           {
+                               IdRole = userx.IdRole,
+                               FullName = userx.FullName,
+                               Address = userx.Address,
+                               Age = userx.Age,
+                               Description = rolex.Description,
+                               Email = userx.Email,
+                               IdUser = userx.IdUser,
+                               Name = userx.Name,
+                               Password = userx.Password,
+                               Phone = userx.Phone
+                           });
 
-
-            return await _context.User.ToListAsync();
+            return  dataUser.ToList();
         }
 
         // GET: api/User/5
