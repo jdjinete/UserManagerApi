@@ -46,6 +46,30 @@ namespace UserManagerApi.Controllers
             return  dataUser.ToList();
         }
 
+        // GET: api/User/Filter
+        [Route("Filter")]
+        [EnableCors("*")]
+        public async Task<ActionResult<IEnumerable<UserDTO>>> Filter(string userName, int idRol) {
+            var dataUser = from userx in await _context.User.ToListAsync()
+                           join rolex in await _context.Role.ToListAsync() on userx.IdRole equals rolex.IdRole
+                           where userx.Name ==  userName && userx.IdRole == idRol
+                           select (new UserDTO
+                           {
+                               IdRole = userx.IdRole,
+                               FullName = userx.FullName,
+                               Address = userx.Address,
+                               Age = userx.Age,
+                               Description = rolex.Description,
+                               Email = userx.Email,
+                               IdUser = userx.IdUser,
+                               Name = userx.Name,
+                               Password = userx.Password,
+                               Phone = userx.Phone
+                           });
+
+            return dataUser.ToList();
+        }
+
         // GET: api/User/5
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
@@ -60,7 +84,7 @@ namespace UserManagerApi.Controllers
             return user;
         }
 
-        // POST: api/Authentication
+        // POST: api/User/Authentication
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]

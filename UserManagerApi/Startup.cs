@@ -53,7 +53,13 @@ namespace UserManagerApi
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=User}/{action=Authentication}/{data?}");
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=User}/{action=Filter}/{userName?}/{idRol?}");
             });
+
+
+            
 
 
             //app.UseEndpoints(endpoints =>
