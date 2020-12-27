@@ -19,6 +19,6 @@ namespace UserManagerApi.Models
 
             public int IdRole { get; set; }
 
-            public string Description { get; set; }
+            public string NameRole { get; set; }
     }
 }
