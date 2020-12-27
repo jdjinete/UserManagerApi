@@ -26,9 +26,25 @@ namespace WebAppManagerContent.Controllers
         }
 
         // GET: PruebaController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Login(LoginModel model)
         {
-            return View();
+            string data = JsonConvert.SerializeObject(model);
+            string jsonResult = consumeRESTfulAPI.PostItem(url, data);
+            return RedirectToAction("Index");
+            //switch (result)
+            //{
+            //    case SignInStatus.Success:
+            //        return RedirectToLocal(returnUrl);
+            //    case SignInStatus.LockedOut:
+            //        return View("Lockout");
+            //    case SignInStatus.RequiresVerification:
+            //        return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+            //    case SignInStatus.Failure:
+            //    default:
+            //        ModelState.AddModelError("", "Invalid login attempt.");
+            //        return View(model);
+            //}
+
         }
 
         // GET: PruebaController/Create
@@ -102,5 +118,8 @@ namespace WebAppManagerContent.Controllers
                 return View();
             }
         }
+
+
+
     }
 }
