@@ -53,6 +53,7 @@ namespace UserManagerApi.Controllers
             var dataUser = from userx in await _context.User.ToListAsync()
                            join rolex in await _context.Role.ToListAsync() on userx.IdRole equals rolex.IdRole
                            where userx.Name ==  userName && userx.IdRole == idRol
+                           orderby userx.IdUser descending
                            select (new UserDTO
                            {
                                IdRole = userx.IdRole,
