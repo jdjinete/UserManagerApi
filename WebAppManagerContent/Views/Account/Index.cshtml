@@ -31,7 +31,7 @@
                 @Html.DisplayNameFor(model => model.Age)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdRole)
+                @Html.DisplayNameFor(model => model.nameRole)
             </th>
             <th></th>
         </tr>
@@ -60,7 +60,7 @@
                     @Html.DisplayFor(modelItem => item.Age)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IdRole)
+                    @Html.DisplayFor(modelItem => item.nameRole)
                 </td>
                 <td>
                     @Html.ActionLink("Editar", "Edit", new { /* id=item.PrimaryKey */ }) |

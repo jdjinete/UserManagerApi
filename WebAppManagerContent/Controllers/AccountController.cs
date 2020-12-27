@@ -42,18 +42,22 @@ namespace WebAppManagerContent.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(AccountModel model)
         {
-            try
+            if (ModelState.IsValid)
             {
-                var list = new Dictionary<string, string>();
-                model.Password = Extensions.Base64Encode(model.SPassword);
-                string data = JsonConvert.SerializeObject(model);
-                string jsonResult = consumeRESTfulAPI.PostItem(url, data);
-                return RedirectToAction("Index");
+                try
+                {
+                    var list = new Dictionary<string, string>();
+                    model.Password = Extensions.Base64Encode(model.SPassword);
+                    string data = JsonConvert.SerializeObject(model);
+                    string jsonResult = consumeRESTfulAPI.PostItem(url, data);
+                    return RedirectToAction("Index");
+                }
+                catch (WebException ex)
+                {
+                    return View();
+                }
             }
-            catch(WebException ex )
-            {
-                return View();
-            }
+            return View(model);
         }
 
         // GET: PruebaController/Edit/5

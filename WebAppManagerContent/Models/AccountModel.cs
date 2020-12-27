@@ -40,8 +40,10 @@ namespace WebAppManagerContent.Models
         public int Age { get; set; }
 
         [Required]
-        [Display(Name = "Rol")]
         public int IdRole { get; set; }
+
+        [Display(Name = "Rol")]
+        public string nameRole { get; set; }
 
 
     }
